@@ -1,14 +1,14 @@
+//////// 1
+
 function hasTwoCubeSums(n) {
-	let count = 0;
-    let limit = Math.cbrt(n);
-
-    for (let i = 0; i < limit; i++) {
-        for (let j = i; j < limit; j++) {
+	let counter = 0;
+    let max = Math.cbrt(n);
+    for (let i = 0; i < max; i++) {
+        for (let j = i; j < max; j++) {
             if (i ** 3 + j ** 3 == n) {
-                count++;
+                counter++;
             }
-
-            if (count >= 2) {
+            if (counter >= 2) {
                 return true;
             }
         }
@@ -16,9 +16,7 @@ function hasTwoCubeSums(n) {
     return false;
 }
 
-
-//console.log(hasTwoCubeSums(42));
-
+//////2
 
 function ipv4Parser(ip, mask){
     let parsedIP = ip.split(".").map(el => +el);
@@ -33,8 +31,7 @@ function ipv4Parser(ip, mask){
     return [network.join("."), host.join(".")];
 }
 
-//console.log(ipv4Parser('192.168.50.1', '255.255.255.0'));
-
+//////3
 
 function whatCentury(year) {
     let first = year.slice(0, 2);
@@ -59,34 +56,31 @@ function whatCentury(year) {
 
 //console.log(whatCentury("2011"));
 
+/////////4
 
 function findMissing(list) {  
-    let resI = 0;
+    let resi = 0;
 
     if (list[1] - list[0] != list[2] - list[1]) {
-        resI = list[1] - list[0] > list[2] - list[1] ? 0 : 1;
+        resi = list[1] - list[0] > list[2] - list[1] ? 0 : 1;
     }
     else {
         let d = list[1] - list[0];
         for (let i = 3; i < list.length; i++) {
             if (list[i] - list[i - 1] != d) {
-                resI = i - 1;
+                resi = i - 1;
             }
         }
     }
-
-    return list[resI] + (list[resI + 1] - list[resI]) / 2;
+    return list[resi] + (list[resi + 1] - list[resi]) / 2;
 }
 
-//console.log(findMissing([1, 2, 3, 4, 5, 7, 8]))
-
+/////5
 
 function primeFactors(n){
     let d = 2;
     let power = 0;
     let preResult = [];
-
-    // Проверка на 2
     while (n % d === 0) {
         n /= d;
         power++;
@@ -95,30 +89,24 @@ function primeFactors(n){
         preResult.push(power === 1 ? `(${d})` : `(${d}**${power})`);
     }
     d++;
-
-    // Нечётные числа
     while (d * d < n) {
         power = 0;
-
         while (n % d === 0) {
             n /= d;
             power++;
         }
-
         if (power > 0) {
             preResult.push(power === 1 ? `(${d})` : `(${d}**${power})`);
         }
         d += 2;    
     }
-
     if (n != 1) {
         preResult.push(`(${n})`);
     }
-
     return preResult.join("");
 }
 
-//console.log(primeFactors(7775460))
+/////////////6
 
 
 function toWeirdCase(string){
@@ -129,64 +117,63 @@ function toWeirdCase(string){
     ).join(" ");
 }
 
-//console.log(toWeirdCase("String"));
-
+//////7
 
 function wave(str){
-    let result = [];
+let res = [];
 
     for (let i = 0; i < str.length; i++) {
         if (str[i] == ' ')
             continue;
 
-        result.push(str.slice(0, i) + str[i].toUpperCase() + str.slice(i + 1))
+        res.push(str.slice(0, i) + str[i].toUpperCase() + str.slice(i + 1))
     }
 
-    return result
+    return res;
+
 }
 
-//console.log(wave("s t r i n g"))
+
+///////////8
 
 
 function expandedForm(num) {
-    let preResult = [];
-    let count = 0;
-
+let result = [];
+    let counter = 0;
     while (num > 0) {
         if (num % 10 != 0) {
-            preResult.push(`${num % 10}${'0'.repeat(count)}`);
+            result.push(`${num % 10}${'0'.repeat(counter)}`);
         }
         num = Math.floor(num / 10);
-        count++;
+        counter++;
     }
+    return result.reverse().join(" + ");
 
-    return preResult.reverse().join(" + ");
 }
 
-//console.log(expandedForm(123));
+
+//////////// 9 
 
 
-function solution(str){
+function solution(str)
+{
    let flag = str.length % 2 == 0;
-   let result = [];
-
+   let res = [];
    for (let i = 0; i < str.length - (flag ? 0 : 1); i += 2) {
-        result.push(str[i] + str[i + 1]);
+        res.push(str[i] + str[i + 1]);
    }
-
    if (!flag) {
-        result.push(str[str.length - 1] + "_");
+        res.push(str[str.length - 1] + "_");
    }
-
-   return result;
+   return res;
 }
 
-//console.log(solution("abc"));
+////////// 10
 
 
-function bingo(ticket, win){
-    let count = 0;
-
+function bingo(ticket, win)
+{
+let count = 0;
     ticket.map(el => {
         for (let i = 0; i < el[0].length; i++) {
             if (el[0].charCodeAt(i) === el[1]) {
@@ -195,31 +182,25 @@ function bingo(ticket, win){
             }
         }
     })
-
-    return count >= win ? "Winner!" : "Loser!";
+    return count >= win ? "You won!" : "You lose!";
 }
 
-//console.log(bingo([['HGTYRE', 74], ['BE', 66], ['JKTY', 74]], 3));
+/////////// 11
 
-
-function domainName(url){
-    let regex = /(https?:\/\/)?(www\.)?/;
-    return url.replace(regex, "").split(".")[0];
+function domainName(url)
+{
+  let reg = /(https?:\/\/)?(www\.)?/;
+    return url.replace(reg, "").split(".")[0];
 }
 
-//console.log(domainName("http://github.com/carbonfive/raygun"));
+///////////// 12
 
-
-function longest(arr, n) {
-    //return arr.sort((a, b) => b.length - a.length)[n - 1];
-
-    return arr.map((str, index) => ({ str, index })).sort((a, b) =>
-      b.str.length - a.str.length || a.index - b.index
-    )[n - 1].str;
+function longest(arr, n)
+{
+ return arr.map((str, index) => ({ str, index })).sort((a, b) =>
+      b.str.length - a.str.length || a.index - b.index)[n - 1].str;
 }
-
-//console.log(longest(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'k','l'],1));
-
+///////////// 13
 
 function hexStringToRGB(hexString) {
     return {
@@ -229,7 +210,7 @@ function hexStringToRGB(hexString) {
     }
 }
 
-//console.log(hexStringToRGB("#FF9933"));
+/////////////// 14
 
 
 function isCircleSorted( arr ){
@@ -254,15 +235,14 @@ function isCircleSorted( arr ){
     return true;
 }
 
-//console.log(isCircleSorted([6, 2, 3, 4, 5]));
-
+//////////// 16
 
 Array.prototype.square = function() {
-    return this.map(el => el ** 2);
+    return this.map(i => i ** 2);
 }
 
 Array.prototype.cube = function() {
-    return this.map(el => el ** 3);
+    return this.map(i => i ** 3);
 }
 
 Array.prototype.average = function() {
@@ -271,24 +251,24 @@ Array.prototype.average = function() {
 
 Array.prototype.sum = function() {
     let sum = 0;
-    this.forEach(el => sum += el);
+    this.forEach(i => sum += i);
     return sum;
 }
 
 Array.prototype.even = function() {
-    let result = []
-    this.forEach(el => {
-        if (el % 2 === 0)
-            result.push(el);
+    let res = []
+    this.forEach(i => {
+        if (i % 2 === 0)
+            res.push(i);
     });
-    return result;
+    return res;
 }
 
 Array.prototype.odd = function() {
-    let result = []
-    this.forEach(el => {
-        if (el % 2 !== 0)
-            result.push(el);
+    let res = []
+    this.forEach(i => {
+        if (i % 2 !== 0)
+            res.push(i);
     });
-    return result;
+    return res;
 }
